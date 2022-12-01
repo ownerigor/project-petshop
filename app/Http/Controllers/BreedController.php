@@ -16,7 +16,7 @@ class BreedController extends Controller
     {
         $breeds = Breed::all();
 
-        return view('breeds.index')->with('breeds', $breeds);
+        return view('breed.index')->with('breeds', $breeds);
     }
 
     /**
@@ -26,7 +26,7 @@ class BreedController extends Controller
      */
     public function create()
     {
-        return view('breeds.create');
+        return view('breed.create');
     }
 
     /**
@@ -41,10 +41,10 @@ class BreedController extends Controller
         $breed->name = $request->input('name');
 
         $breed->save();
+        return redirect(route('breeds.index'));
 
-        $breeds = Breed::all();
-        return view('breeds.index')->with('breeds', $breeds)
-            ->with('msg', 'Raça cadastrada com sucesso!');
+        /* return view('breeds.index')->with('breeds', $breeds)
+            ->with('msg', 'Raça cadastrada com sucesso!'); */
     }
 
     /**
@@ -55,12 +55,12 @@ class BreedController extends Controller
      */
     public function show($id)
     {
-        $breed = Breed::find($id);
+        $b = Breed::find($id);
 
-        if ($breed) {
-            return view('breeds.show')->with('breed', $breed);
+        if ($b) {
+            return view('breed.show')->with('breed', $b);
         } else {
-            return view('breeds.show')->with('msg', 'Raça não encontrada!');
+            return abort(404);
         }
     }
 
@@ -72,15 +72,10 @@ class BreedController extends Controller
      */
     public function edit($id)
     {
-        $breed = Breed::find($id);
+        $b = Breed::find($id);
 
-        if ($breed) {
-            return view('breeds.edit')->with('breed', $breed);
-        } else {
-            $breeds = Breed::all();
-            return view('breeds.index')->with('breeds', $breeds)
-                ->with('msg', 'Raça não encontrada!');
-        }
+        return view('breed.edit')
+            ->with('breed', $b);
     }
 
     /**
@@ -92,15 +87,12 @@ class BreedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $breed = Breed::find($id);
+        $b = Breed::find($id);
 
-        $breed->name = $request->input('name');
+        $b->name = $request->input('name');
 
-        $breed->save();
-
-        $breeds = Breed::all();
-        return view('breeds.index')->with('breeds', $breeds)
-            ->with('msg', 'Raça atualizada com sucesso!');
+        $b->save();
+        return redirect(route('breeds.index'));
     }
 
     /**
@@ -111,13 +103,11 @@ class BreedController extends Controller
      */
     public function destroy($id)
     {
-        $breed = Breed::find($id);
+        $b = Breed::find($id);
 
-        $breed->delete();
+        $b->delete();
 
-        $breeds = Breed::all();
-        return view('breeds.index')->with('breeds', $breeds)
-            ->with('msg', "Raça excluída com sucesso!");
+        return redirect(route('breeds.index'));
     }
 
     public static function getBreeds(){
