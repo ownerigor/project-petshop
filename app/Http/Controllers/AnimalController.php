@@ -17,7 +17,7 @@ class AnimalController extends Controller
         $animals = Animal::with('breed')->paginate(10);
 
         //..return the view with the retrieved data
-        return view('animal.index')->with('animals', $animals);        
+        return view('animal.index')->with('animals', $animals);
     }
 
     /**
@@ -42,8 +42,7 @@ class AnimalController extends Controller
     public function store(Request $request)
     {
         $request->validate($this->getRules());
-        
-        //dd($request);
+
         $animal = new Animal();
         $animal->name = $request->input('name');
         $animal->size = $request->input('size');
@@ -51,7 +50,7 @@ class AnimalController extends Controller
         $animal->age = $request->input('age');
         $animal->breed_id = $request->input('breed');
         $animal->save();
-        return redirect(route('animals.index'));        
+        return redirect(route('animals.index'));
     }
 
     /**
@@ -87,7 +86,7 @@ class AnimalController extends Controller
 
         return view('animal.edit')
             ->with('animal', $a)
-            ->with('breeds', $breeds);        
+            ->with('breeds', $breeds);
     }
 
     /**
@@ -100,7 +99,7 @@ class AnimalController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate($this->getRules());
-        
+
         $a = Animal::find($id);
 
         $a->name = $request->input('name');

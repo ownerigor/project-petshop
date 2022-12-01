@@ -17,6 +17,12 @@
             <ul>
                 <li> <a href="{{ route('animals.create') }}">Novo Animal</a> </li>
                 <li> <a href="{{ route('animals.index') }}">Listar Animais</a> </li>
+
+                <br>
+
+                <li> <a href="{{ route('breeds.create') }}">Nova Raça</a> </li>
+                <li> <a href="{{ route('breeds.index') }}">Listar Raças</a> </li>
+
             </ul>
         </nav>
         <div class="content">

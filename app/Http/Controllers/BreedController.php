@@ -14,7 +14,9 @@ class BreedController extends Controller
      */
     public function index()
     {
-        //
+        $breeds = Breed::all();
+
+        return view('breeds.index')->with('breeds', $breeds);
     }
 
     /**
@@ -24,7 +26,7 @@ class BreedController extends Controller
      */
     public function create()
     {
-        //
+        return view('breeds.create');
     }
 
     /**
@@ -35,7 +37,14 @@ class BreedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $breed = new Breed();
+        $breed->name = $request->input('name');
+
+        $breed->save();
+
+        $breeds = Breed::all();
+        return view('breeds.index')->with('breeds', $breeds)
+            ->with('msg', 'Raça cadastrada com sucesso!');
     }
 
     /**
@@ -46,7 +55,13 @@ class BreedController extends Controller
      */
     public function show($id)
     {
-        //
+        $breed = Breed::find($id);
+
+        if ($breed) {
+            return view('breeds.show')->with('breed', $breed);
+        } else {
+            return view('breeds.show')->with('msg', 'Raça não encontrada!');
+        }
     }
 
     /**
@@ -57,7 +72,15 @@ class BreedController extends Controller
      */
     public function edit($id)
     {
-        //
+        $breed = Breed::find($id);
+
+        if ($breed) {
+            return view('breeds.edit')->with('breed', $breed);
+        } else {
+            $breeds = Breed::all();
+            return view('breeds.index')->with('breeds', $breeds)
+                ->with('msg', 'Raça não encontrada!');
+        }
     }
 
     /**
@@ -69,7 +92,15 @@ class BreedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $breed = Breed::find($id);
+
+        $breed->name = $request->input('name');
+
+        $breed->save();
+
+        $breeds = Breed::all();
+        return view('breeds.index')->with('breeds', $breeds)
+            ->with('msg', 'Raça atualizada com sucesso!');
     }
 
     /**
@@ -80,11 +111,17 @@ class BreedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $breed = Breed::find($id);
+
+        $breed->delete();
+
+        $breeds = Breed::all();
+        return view('breeds.index')->with('breeds', $breeds)
+            ->with('msg', "Raça excluída com sucesso!");
     }
 
     public static function getBreeds(){
         $breeds = Breed::all();
         return $breeds;
-    }    
+    }
 }

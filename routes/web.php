@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/animals', AnimalController::class);
-    Route::resource('/studios', BreedController::class);
+    Route::resource('/breeds', BreedController::class);
 });
 
 require __DIR__.'/auth.php';
