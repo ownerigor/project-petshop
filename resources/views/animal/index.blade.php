@@ -1,10 +1,10 @@
 {{-- inherit from view base --}}
-@extends('base')
+@extends('base1')
 
 {{-- create a section to specific code --}}
 @section('content')
     @if (!is_null($animals))
-        <table class="table table-hover table-sm">
+        <table class="table table-hover table-sm table-striped">
             <tr>
                 <th>Nome</th>
                 <th>Porte</th>
@@ -34,6 +34,8 @@
                 </tr>
             @endforeach
         </table>
+        <br>
+    <a href="{{ route('dashboard') }}">Voltar ao Painel de Controle</a>
         {{-- creating the links to pagination --}}
         <div class="row">
             {{ $animals->links('pagination::bootstrap-5') }}

@@ -1,8 +1,8 @@
-@extends('base')
+@extends('base1')
 
 @section('content')
     @if (!is_null($breeds))
-        <table class="table table-hover table-sm">
+        <table class="table table-hover table-sm table-striped">
             <tr>
                 <th>Nome</th>
 
@@ -25,7 +25,9 @@
                 </tr>
             @endforeach
         </table>
-    @else
+        <br>
+    <a href="{{ route('dashboard') }}">Voltar ao Painel de Controle</a>
+         @else
         <h3>Não há raças cadastradas!</h3>
     @endif
 

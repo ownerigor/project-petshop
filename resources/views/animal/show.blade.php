@@ -1,8 +1,8 @@
-@extends('base')
+@extends('base1')
 
 @section('content')
 
-<h2>Exibindo Animal</h2>
+<h4>Exibindo Animal</h4>
 
 <p> <strong>Nome: </strong>{{ $animal->name }}</p>
 <p> <strong>Porte: </strong>{{ $animal->size }}</p>

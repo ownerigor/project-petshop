@@ -1,4 +1,4 @@
-@extends('base')
+@extends('base1')
 
 @section('content')
     <h2>Atualizar uma Raça</h2>
@@ -7,11 +7,14 @@
 
         @method('PUT')
         <label for="Nome">Nome:</label>
-        <input type="text" name="name" id="name" required value="{{ $breed->name }}">
+        <input class="form-control" type="text" name="name" id="name" required value="{{ $breed->name }}">
     </form>
 
-    <button form="update-form" type="submit">Salvar</button>
-    <button form="delete-form" type="submit" value="Excluir" >Excluir</button>
+    <br> 
+
+            <input form="update-form" class="btn btn-success" type="submit" value="Salvar">
+            <input  form="delete-form" class="btn btn-warning" type="reset" value="Limpar">
+   
 
     <form method="POST" class="form" id="delete-form" action="{{ route('breeds.destroy', $breed->id) }}">
         @csrf
